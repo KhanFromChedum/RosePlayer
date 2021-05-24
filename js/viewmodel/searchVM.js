@@ -33,6 +33,10 @@ class searchVM extends templateLoader
                 let li = this._stationVM.create(stations_[i]);
                 this._ul.appendChild(li);
             }
+            if(stations_.length == 0)
+            {
+                this._ul.innerText= 'No stations found...';
+            }
             this._ready = true;
 
         })
