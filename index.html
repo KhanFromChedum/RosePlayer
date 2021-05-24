@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/utils.css">
+    <link rel="stylesheet" href="css/player.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/filterView.css">
+    <link rel="stylesheet" href="css/displayresult.css">
+    <title>Document</title>
+</head>
+<body class='lightback no-margin no-padding flexrow flexspacebetween'>
+    <!-- <div class='flexrow fullwidth'> -->
+        <nav class='darkback clearfont fullheight right-shadow' id="nav">
+            <div class="stick-left">
+                <div class='flexrow flexcenter clickable tabheader bold' tab='tabsearch'><span>Search</span><img src="img/search_white_48dp.svg" alt="advanced"></div>
+                <div class='flexrow flexcenter clickable tabheader bold' tab='tabfavorite' id='tabFav'><span>Favorite</span><img src="img/favorite_border_white_48dp.svg" alt="advanced"></div>
+                <div class='flexrow flexcenter clickable tabheader bold' tab='tabcountries'><span>Countries</span><img src="img/flag_white_48dp.svg" alt="advanced"></div>
+                <div class='flexrow flexcenter clickable tabheader bold' tab='tabtags'><span>Tags</span><img src="img/label_white_48dp.svg" alt="advanced"></div>
+            </div>
+        </nav>
+
+        <div class='' id='content'>
+            <div class="fullparentwidth tab" id='tabsearch'></div>
+            <div class="fullparentwidth hidden tab" id='tabfavorite'></div>
+            <div class="fullparentwidth hidden tab" id='tabcountries'></div>
+            <div class="fullparentwidth hidden tab" id='tabtags'></div>
+            <div class="fullparentwidth hidden tab" id='stationsdisplay'></div>
+        </div>
+
+        <div id='player' class='no-margin left-shadow  fullheight'>
+            <div class="stick-right flexcolumn flexcenter">
+                <img src="img/error.png" alt="" id='logo'>
+                <div>Radio name</div>
+                <img src="img/play_arrow_black_48dp.svg" alt="" id='playbtn'>
+                <div id="volume">               
+                    <img src="img/volume_up_black_48dp.svg" alt="Station"  >
+                    <input type="range" id="volume" name="volume" min="0" max="100" class=''   >
+                </div>
+
+                <div id="equalizer" class='flexrow'>
+                    <div class='flexcolumn'><div class='title'>bass</div><input class='eqinput' type="range" name="rangeL" id="lBand" min="-10" max="5" value="1"></div>
+                    <div class='flexcolumn'><div class='title'>mid</div><input  class='eqinput' type="range" name="rangeM" id="mBand" min="-10" max = "5" value="1"></div>
+                    <div class='flexcolumn'><div class='title'>treble</div><input class='eqinput' type="range" name="rangeH" id="hBand" min="-10" max="5" value="1"></div>
+                </div>
+            </div>
+
+        <!-- </div> -->
+    </div>
+    <script src="js/utils/tab.js"></script>
+    <script src="js/index.js"></script>
+
+</body>
+</html>

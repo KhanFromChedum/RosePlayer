@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "run":"electron .",
+    "run": "electron .",
     "test": "jest"
   },
   "author": "Khan From Chedum",
@@ -13,6 +13,7 @@
     "electron": "^12.0.7",
     "jest": "^26.6.3",
     "radio-browser": "^2.1.7",
+    "sqlite3": "^5.0.2",
     "sqllite": "^1.1.2"
   }
 }

@@ -1,0 +1,116 @@
+.flexrow
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.flexcolumn
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.flex1
+{
+    flex-grow: 1;
+}
+
+.flex2
+{
+    flex-grow: 2;
+}
+
+.flexcenter
+{
+    align-items: center;
+}
+
+.darkback
+{
+    background-color: #90be6d;
+}
+
+.lightback
+{
+    background-color: #4d908e;
+}
+.clearfont
+{
+    color:#ebfffa;
+}
+
+.bold
+{
+    font-weight: bold;
+}
+
+.italic
+{
+    font-style: italic;
+}
+
+.no-margin
+{
+    margin: 0px;
+}
+
+.no-padding
+{
+    padding: 0px;
+}
+
+.fullheight
+{
+    min-height: 100vh;
+}
+
+.fullwidth
+{
+    min-width: 100vw;
+}
+
+.fullparentwidth
+{
+    min-width: 100%;
+}
+
+.right-shadow
+{
+    -webkit-box-shadow: 5px 7px 15px -2px #000000; 
+    box-shadow: 5px 7px 15px -2px #000000;
+}
+
+.left-shadow
+{
+    -webkit-box-shadow: -6px 7px 15px -2px #000000; 
+    box-shadow: -6px 7px 15px -2px #000000;
+}
+
+.hidden
+{
+    display: none;
+}
+
+.clickable
+{
+    cursor: pointer;
+}
+
+.stick-left
+{
+    position: sticky;
+    left: 0px;
+    top:0px;
+}
+
+.stick-right
+{
+    position: sticky;
+    right: 0px;
+    top:0px;
+}
+
+.flexspacebetween
+{
+    justify-content: space-between;
+}

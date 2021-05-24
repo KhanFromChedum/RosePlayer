@@ -1,0 +1,18 @@
+#player
+{
+    width: 300px;
+}
+
+#logo
+{
+    height: 200px;
+    width: 200px;
+    display: block;
+}
+
+.eqinput
+{
+    -webkit-appearance: slider-vertical;
+    width: 20px;
+    height: 80px;
+}
