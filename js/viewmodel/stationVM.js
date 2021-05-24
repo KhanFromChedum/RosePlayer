@@ -1,6 +1,8 @@
 const templateLoader = require( './templateLoader');
+const playerVM = require( './PlayerVM');
 const { ipcRenderer, ipcMain, Accelerator } = require('electron');
 
+var g_player = new playerVM();
 
 class stationVM extends templateLoader
 {
@@ -20,6 +22,7 @@ class stationVM extends templateLoader
 
     _isFavorite(li_,isfav)
     {
+        
         let img = li_.getElementsByTagName('img');
         if(isfav==true)
         {
@@ -50,7 +53,7 @@ class stationVM extends templateLoader
         this._isFavorite(li_,false);
         for(let i =0;i< this._favorites.length;i++)
         {
-            if(uuid == this._favorites[i].uuid)
+            if(uuid == this._favorites[i].stationuuid)
             {
                 this._isFavorite(li_,true);
                 break;
@@ -58,9 +61,10 @@ class stationVM extends templateLoader
         }
 
         img[2].addEventListener('click',(e_)=>{
+            event.stopPropagation();
             if(station_.homepage!="")
             {
-                ipcRenderer.send('openurl',station_.url);
+                ipcRenderer.send('openurl',station_.homepage);
             }
             else
             {
@@ -69,6 +73,7 @@ class stationVM extends templateLoader
         });
         
         img[1].addEventListener('click',(e_)=>{
+            event.stopPropagation();
             let isFav = li_.getAttribute('isFav');
             ipcRenderer.send('askFavorites');
             if(isFav == "true")
@@ -85,6 +90,11 @@ class stationVM extends templateLoader
                 this._isFavorite(li_,true);
             }
         });
+
+        li_.addEventListener('click',(e_)=>{
+            console.log(station_);
+            g_player.play(station_);
+        })
 
     }
 

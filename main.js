@@ -28,7 +28,7 @@ function createWindow () {
  */
 function CreateTable()
 {
-    let query = "create table Favorites (uuid VARCHAR(100) PRIMARY KEY, name VARCHAR(100), favicon VARCHAR(1000), url VARCHAR(1000), tags VARCHAR(1000) )";
+    let query = "create table Favorites (stationuuid VARCHAR(100) PRIMARY KEY, name VARCHAR(100), favicon VARCHAR(1000), url VARCHAR(1000),homepage VARCHAR(1000) ,tags VARCHAR(1000) )";
    
     db.run(query, [], function(err) {
         if (err) {
@@ -195,7 +195,7 @@ function getAllFavorites(callback_)
 
 function AddToFavorites(station_)
 {
-    let query = "insert into favorites(uuid,name,url,favicon,tags) values('" + station_.stationuuid + "','" + station_.name + "','" + station_.url + "','" + station_.favicon +  "','" +station_.tags + "')";
+    let query = "insert into favorites(stationuuid,name,url,homepage,favicon,tags) values('" + station_.stationuuid + "','" + station_.name + "','" + station_.url + "','" + station_.homepage +"','" + station_.favicon +  "','" +station_.tags + "')";
    // console.log(query);
     db.run(query, [], function(err) {
         if (err) {
@@ -214,15 +214,11 @@ function AddToFavorites(station_)
  function RemoveFromFavorites(station_)
  {
    let uuid;
-    if(station_.stationuuid == undefined)
-    {
-      uuid = station_.uuid;
-    }
-    else{
-      uuid = station_.stationuuid;
-    }
+ 
+  uuid = station_.stationuuid;
 
-     let query = "delete from favorites where uuid = '" +uuid  + "'";
+
+     let query = "delete from favorites where stationuuid = '" +uuid  + "'";
      console.log(query);
      db.run(query, [], function(err) {
          if (err) {
