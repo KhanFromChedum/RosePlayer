@@ -15,6 +15,32 @@ class playerVM
     {
         this._player = new player();
         this._htmlPlayer = document.getElementById('player');
+        let playbtn = document.getElementById('playbtn');
+        playbtn.addEventListener('click',(e_)=>{
+            if(g_player.isPlaying())
+            {
+                g_player.pause();
+                playbtn.src = './img/play_arrow_black_48dp.svg';
+            }
+            else
+            {
+                g_player.play((state_)=>{
+                    switch(state_)
+                    {
+                        case 'playing':
+                            playbtn.src = './img/pause_black_48dp.svg';
+                            break;
+                        case 'error':
+                            playbtn.src = './img/error_black_48dp.svg';
+                            break;
+                    }});
+                playbtn.src = './img/pause_black_48dp.svg';
+            }
+        });
+        this._bindvolume();
+        this._bindbass();
+        this._bindmid();
+        this._bindtreble();
     }
 
     _setLogo()
@@ -81,6 +107,9 @@ class playerVM
                     break;
             }
         });
+
+        
+
     }
 
 
@@ -91,10 +120,7 @@ class playerVM
         this._setradioname();
         g_player.source(station_.url);
        this._playbutton();
-       this._bindvolume();
-       this._bindbass();
-       this._bindmid();
-       this._bindtreble();
+
     }
 
 
