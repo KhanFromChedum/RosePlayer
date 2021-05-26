@@ -27,12 +27,17 @@
 
 .darkback
 {
-    background-color: #90be6d;
+    /* background-color: #90be6d; */
+    background: rgb(226,225,245);
+    background: linear-gradient(0deg, rgba(226,225,245,1) 0%, rgba(96,70,70,1) 50%, rgba(5,4,4,1) 100%);
 }
 
 .lightback
 {
-    background-color: #4d908e;
+    /* background-color: #4d908e;
+     */
+     background: rgb(226,225,245);
+background: linear-gradient(0deg, rgba(226,225,245,1) 0%, rgba(223,223,233,1) 55%, rgba(240,233,233,1) 100%);
 }
 .clearfont
 {

@@ -17,6 +17,7 @@ class player
     constructor()
     {
         this._audio = new Audio();
+        this._audio.crossOrigin = 'anonymous';
         this._isPlaying = false;
 
         this._context = new AudioContext();
