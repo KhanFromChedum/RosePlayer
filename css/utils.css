@@ -28,8 +28,9 @@
 .darkback
 {
     /* background-color: #90be6d; */
-    background: rgb(226,225,245);
-    background: linear-gradient(0deg, rgba(226,225,245,1) 0%, rgba(96,70,70,1) 50%, rgba(5,4,4,1) 100%);
+
+    background: rgb(29,29,29);
+    background: linear-gradient(0deg, rgba(29,29,29,1) 0%, rgba(29,29,29,1) 50%, rgba(29,29,29,1) 100%);
 }
 
 .lightback

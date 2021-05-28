@@ -14,6 +14,7 @@ function createWindow () {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    icon:"img/outline_filter_vintage_black_48dp.png",
     webPreferences: {
       nodeIntegration: true,     //In order to get access to ipc renderer 
       contextIsolation: false

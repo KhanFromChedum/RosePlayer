@@ -11,8 +11,6 @@
 .filterviewUl>li
 {
     border: 4px solid #ff6550;
-    /* border: 5px ridge #afbbf2; */
-    /* border-radius: 0px 19px 0px 19px; */
     padding: 10px;;
     margin: 5px;
     /* background-color: #90BE6D; */
@@ -21,9 +19,6 @@
 .filterviewUl>li:hover
 {
     border: 5px solid #ff6550;
-    /* border: 5px ridge #afbbf2; */
-    /* border-radius: 0px 19px 0px 19px; */
     padding: 10px;;
     margin: 5px;
-    /* background-color: #90BE6D; */
 }
