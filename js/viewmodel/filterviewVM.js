@@ -57,6 +57,10 @@ class filterviewVM extends templateLoader
 
         for(var i = 0; i < this._datas.length;i++)
         {
+            if(this._datas[i].name.includes('#'))
+            {
+                continue;
+            }
             let liclone = li.cloneNode(true);
             liclone.setAttribute('index',i);
             liclone.id='';
