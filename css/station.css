@@ -1,0 +1,13 @@
+.stationtags
+{
+     max-width: 300px; 
+    text-overflow: ellipsis;
+    /*white-space: nowrap;*/
+    overflow: hidden;
+}
+
+.stationname
+{
+    /* max-width: 100px; */
+    text-overflow: ellipsis;
+}

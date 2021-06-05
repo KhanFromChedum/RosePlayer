@@ -1,6 +1,7 @@
 #player
 {
-    width: 300px;
+    min-width: 200px;
+    display: inline-block;
 }
 
 #logo

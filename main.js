@@ -18,7 +18,8 @@ function createWindow () {
     webPreferences: {
       nodeIntegration: true,     //In order to get access to ipc renderer 
       contextIsolation: false
-    }
+    }/*,
+    frame:false*/ 
   })
 
   win.loadFile('index.html')

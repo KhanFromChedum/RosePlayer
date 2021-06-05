@@ -43,7 +43,7 @@ class stationVM extends templateLoader
         img[0].src= station_.favicon;
         let spans = li_.getElementsByTagName('span');
         spans[0].innerText = station_.name;
-        spans[1].innerText = station_.tags;
+        spans[1].innerText = station_.tags.replace(',',', ');
 
         if(station_.stationuuid == undefined)
         {

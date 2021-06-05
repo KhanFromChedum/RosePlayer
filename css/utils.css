@@ -25,6 +25,11 @@
     align-items: center;
 }
 
+.flexright
+{
+    align-items: flex-end;
+}
+
 .darkback
 {
     /* background-color: #90be6d; */
@@ -109,6 +114,12 @@ background: linear-gradient(0deg, rgba(226,225,245,1) 0%, rgba(223,223,233,1) 55
     top:0px;
 }
 
+.stick-top
+{
+    position: sticky;
+    top:0px;
+}
+
 .stick-right
 {
     position: sticky;
@@ -119,4 +130,10 @@ background: linear-gradient(0deg, rgba(226,225,245,1) 0%, rgba(223,223,233,1) 55
 .flexspacebetween
 {
     justify-content: space-between;
+}
+
+.fullparentheight
+{
+
+    max-height: 100%; 
 }
