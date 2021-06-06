@@ -7,7 +7,7 @@ body{
 
 #equalizer>div
 {
-    padding: 5px;;
+    padding: 5px;
 }
 
 #titlebar
@@ -20,6 +20,9 @@ body{
 {
     height: 25px;
     width:25px;
+    -webkit-user-select: auto;
+    -webkit-app-region: no-drag;
+    align-self: flex-end;
 }
 
 #content

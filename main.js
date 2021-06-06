@@ -10,16 +10,18 @@ var radios = new radiosData();
 
 var db = new sqlite3.Database('./favorites.db');
 
+let win;
+
 function createWindow () {
-  const win = new BrowserWindow({
+   win = new BrowserWindow({
     width: 800,
     height: 600,
     icon:"img/outline_filter_vintage_black_48dp.png",
     webPreferences: {
       nodeIntegration: true,     //In order to get access to ipc renderer 
       contextIsolation: false
-    }/*,
-    frame:false*/ 
+    }
+    ,frame:false
   })
 
   win.loadFile('index.html')
@@ -58,6 +60,36 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     db.close();
     app.quit()
+  }
+})
+
+
+
+ipcMain.on('close', () => {
+  db.close();
+    app.quit()
+ 
+})
+
+ipcMain.on('increase',(event, arg)=> {
+  if(win.isMaximized())
+  {
+    win.restore();
+  }
+  else
+  {
+    win.maximize();
+  }
+})
+
+ipcMain.on('reduce',(event, arg)=> {
+  if(win.isMinimized())
+  {
+    win.restore();
+  }
+  else
+  {
+    win.minimize();
   }
 })
 

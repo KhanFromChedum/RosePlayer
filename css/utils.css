@@ -27,7 +27,7 @@
 
 .flexright
 {
-    align-items: flex-end;
+    justify-content: flex-end;
 }
 
 .darkback
@@ -43,8 +43,14 @@
     /* background-color: #4d908e;
      */
      background: rgb(226,225,245);
-background: linear-gradient(0deg, rgba(226,225,245,1) 0%, rgba(223,223,233,1) 55%, rgba(240,233,233,1) 100%);
+    background: linear-gradient(0deg, rgba(226,225,245,1) 0%, rgba(223,223,233,1) 55%, rgba(240,233,233,1) 100%);
 }
+
+.redcolor
+{
+    background-color: red;
+}
+
 .clearfont
 {
     color:#ebfffa;

@@ -67,6 +67,29 @@ function createsearch()
 }
 createsearch();
 
+
+function closeWindow()
+{
+    ipcRenderer.send('close');
+}
+
+document.getElementById('close').addEventListener('click',(e_)=>{
+    ipcRenderer.send('close');
+});
+
+
+document.getElementById('increase').addEventListener('click',(e_)=>{
+    ipcRenderer.send('increase');
+});
+
+
+document.getElementById('reduce').addEventListener('click',(e_)=>{
+    ipcRenderer.send('reduce');
+});
+
+
+
+
 //document.getElementById('tabsearch').appendChild(searchVMod.create());
 
 
