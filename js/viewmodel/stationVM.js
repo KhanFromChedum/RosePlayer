@@ -51,15 +51,17 @@ class stationVM extends templateLoader
         }
         
         this._isFavorite(li_,false);
-        for(let i =0;i< this._favorites.length;i++)
+        if(this._favorites  != undefined)
         {
-            if(uuid == this._favorites[i].stationuuid)
+            for(let i =0;i< this._favorites.length;i++)
             {
-                this._isFavorite(li_,true);
-                break;
+                if(uuid == this._favorites[i].stationuuid)
+                {
+                    this._isFavorite(li_,true);
+                    break;
+                }
             }
         }
-
         img[2].addEventListener('click',(e_)=>{
             event.stopPropagation();
             if(station_.homepage!="")

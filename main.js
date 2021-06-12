@@ -5,10 +5,18 @@ var searchStations = require('./js/Model/searchStations');
 var advancedSearchStation = require('./js/Model/advancedSearchStation');
 const { shell } = require('electron');
 const sqlite3= require('sqlite3');
+const fs = require("fs");
 
 var radios = new radiosData();
 
+var existDb = fs.existsSync('./favorites.db');
+
 var db = new sqlite3.Database('./favorites.db');
+
+if(!existDb)
+{
+  CreateTable();
+}
 
 let win;
 
@@ -16,7 +24,7 @@ function createWindow () {
    win = new BrowserWindow({
     width: 800,
     height: 600,
-    icon:"img/outline_filter_vintage_black_48dp.png",
+    icon:"./img/outline_filter_vintage_black_48dp.png",
     webPreferences: {
       nodeIntegration: true,     //In order to get access to ipc renderer 
       contextIsolation: false
