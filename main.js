@@ -6,6 +6,7 @@ var advancedSearchStation = require('./js/Model/advancedSearchStation');
 const { shell } = require('electron');
 const sqlite3= require('sqlite3');
 const fs = require("fs");
+var internetradio = require('node-internet-radio');
 
 var radios = new radiosData();
 
@@ -272,5 +273,32 @@ function AddToFavorites(station_)
      
  }
 
+ function test(song_)
+ {
+   
+ }
+
+let interval = undefined;
+ ipcMain.on('askNowPLaying',(event_,stationurl_)=>{
+  
+  internetradio.getStationInfo(stationurl_, function(error, song) {
+    if(interval != undefined)
+    {
+      clearInterval(interval);
+    }
+    interval = setInterval(() => {
+      console.log(song);
+      if(song != undefined)
+      {
+        event_.reply('replyNowPLaying',song.title);
+      }
+      else
+      {
+        event_.reply('replyNowPLaying',"");
+      }
+    }, 1000);    
+    }, internetradio.StreamSource.STREAM);
+
+ })
 
  

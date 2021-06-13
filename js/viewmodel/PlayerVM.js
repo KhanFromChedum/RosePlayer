@@ -1,4 +1,5 @@
 const player = require( '../model/player');
+const { ipcRenderer, ipcMain, Accelerator } = require('electron');
 
 var g_player = new player();
 
@@ -16,6 +17,7 @@ class playerVM
         this._player = new player();
         this._htmlPlayer = document.getElementById('player');
         let playbtn = document.getElementById('playbtn');
+        let songtitle = document.getElementById('songtitle');
         playbtn.addEventListener('click',(e_)=>{
             if(g_player.isPlaying())
             {
@@ -41,6 +43,10 @@ class playerVM
         this._bindbass();
         this._bindmid();
         this._bindtreble();
+
+        ipcRenderer.on('replyNowPLaying',(event_,song_)=>{
+            songtitle.innerText = song_;
+        });
     }
 
     _setLogo()
@@ -120,6 +126,11 @@ class playerVM
         this._setradioname();
         g_player.source(station_.url);
        this._playbutton();
+       let songtitle = document.getElementById('songtitle');
+
+       songtitle.innerText = "";
+
+        ipcRenderer.send('askNowPLaying', station_.url);
 
     }
 

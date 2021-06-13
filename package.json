@@ -1,7 +1,7 @@
 {
   "name": "roseplayer",
-  "version": "0.0.1",
-  "description": "A web radio player",
+  "version": "0.0.2",
+  "description": "A webradio player",
   "main": "main.js",
   "scripts": {
     "run": "electron .",
@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
+    "node-internet-radio": "^0.2.1",
     "radio-browser": "^2.1.7",
     "sqlite3": "^5.0.2"
   },
