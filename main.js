@@ -1,8 +1,8 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
-var radiosData = require('./js/Model/radiosdata');
-var searchStations = require('./js/Model/searchStations');
-var advancedSearchStation = require('./js/Model/advancedSearchStation');
+var radiosData = require('./js/model/radiosdata');
+var searchStations = require('./js/model/searchStations');
+var advancedSearchStation = require('./js/model/advancedSearchStation');
 const { shell } = require('electron');
 const sqlite3= require('sqlite3');
 const fs = require("fs");
