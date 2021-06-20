@@ -27,3 +27,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install --save-dev @electron-forge/cli
     - run: npx electron-forge import
+    - run: npm run make
