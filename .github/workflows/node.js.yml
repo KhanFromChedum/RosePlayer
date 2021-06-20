@@ -28,3 +28,5 @@ jobs:
     - run: npm install --save-dev @electron-forge/cli
     - run: npx electron-forge import
     - run: npm run make
+    - name: Download all workflow run artifacts
+      uses: actions/download-artifact@v2
