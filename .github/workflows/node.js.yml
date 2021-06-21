@@ -28,3 +28,4 @@ jobs:
     - run: npm install --save-dev @electron-forge/cli
     - run: npx electron-forge import
     - run: npm run make
+    - run: ls
