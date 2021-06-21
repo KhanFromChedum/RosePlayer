@@ -29,3 +29,10 @@ jobs:
     - run: npx electron-forge import
     - run: npm run make
     - run: ls
+    - name: 'Upload Artifact'
+      uses: actions/upload-artifact@v2
+      with:
+       name: my-artifact
+       path: out
+       retention-days: 1
+ 
