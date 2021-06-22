@@ -10,7 +10,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  build-linux:
 
     runs-on: ubuntu-latest
 
@@ -33,7 +33,32 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
           name: release-ubuntu
-          path: out/
+          path: out/roseplayer-linux-x64
+          
+  build-windows:
+
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install --save-dev @electron-forge/cli
+    - run: npx electron-forge import
+    - run: npm run make
+    - run: ls out
+    - name: Archive compilation output
+      uses: actions/upload-artifact@v2
+      with:
+          name: release-windows
+          path: out/roseplayer-windows-x64          
           
           
           
