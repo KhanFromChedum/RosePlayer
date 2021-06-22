@@ -58,7 +58,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
           name: release-windows
-          path: out/roseplayer-windows-x64          
+          path: out/roseplayer-win32-x64          
           
           
           
