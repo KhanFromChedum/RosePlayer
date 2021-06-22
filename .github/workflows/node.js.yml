@@ -28,3 +28,8 @@ jobs:
     - run: npm install --save-dev @electron-forge/cli
     - run: npx electron-forge import
     - run: npm run make
+    - name: Archive compilation output
+      uses: actions/upload-artifact@v2
+      with:
+          name: code-coverage-report
+          path: out/
