@@ -22,9 +22,7 @@ class stationVM
         });
         
     }
-
-
-
+    
     _fillStation(li_,station_)
     {
         this._fabBtn = new favButtonVM(station_, li_.getElementsByTagName('img')[1] );

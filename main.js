@@ -204,7 +204,6 @@ function isCurrentStationFav(event_,uuid_)
 {
   let query = "select * from favorites where stationuuid='" + uuid_ + "'" ;
 
-  console.log(query);
 
   db.all(query, [], function(err,rows) {
       if (err) {
