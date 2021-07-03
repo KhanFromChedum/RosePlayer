@@ -34,7 +34,6 @@ class favoriteVM extends templateLoader
      */
     async create(stations_)
     {
-console.log(stations_);
         this._ul.innerHTML= "";
         this._stationVMs = new Array();
 

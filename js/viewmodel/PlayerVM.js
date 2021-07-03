@@ -1,5 +1,6 @@
 const player = require( '../model/player');
 const { ipcRenderer, ipcMain, Accelerator } = require('electron');
+const favButtonVM = require( './favbuttonVM');
 
 var g_player = new player();
 
@@ -48,34 +49,6 @@ class playerVM
             songtitle.innerText = song_;
         });
 
-        ipcRenderer.on('replyIfCurrentStationFav',(event_,reply_)=>{
-            let favicon = document.getElementById('favIcon');
-            favicon.src= "./img/favorite_border_black_48dp.svg";
-            favicon.setAttribute('isfav',false);
-            if(reply_==true)
-            {
-                favicon.setAttribute('isfav',true);
-                favicon.src="./img/favorite_black_48dp.svg";
-            }
-        });
-
-        let favicon = document.getElementById('favIcon');
-        favicon.addEventListener('click',(e_)=>{
-alert(favicon.getAttribute('isfav'));            
-            if(favicon.getAttribute('isfav')==true)
-            {
-               
-                ipcRenderer.send('removeFavorite',this._station);
-                favicon.src= "./img/favorite_border_black_48dp.svg";
-                favicon.setAttribute('isfav',false);
-            }
-            else{
-                ipcRenderer.send('addFavorite',this._station);
-                favicon.src="./img/favorite_black_48dp.svg";
-                favicon.setAttribute('isfav',true);
-            }
-
-        });
     }
 
     _setLogo()
@@ -147,6 +120,7 @@ alert(favicon.getAttribute('isfav'));
 
     }
 
+    _fav;
 
     play(station_)
     {
@@ -156,7 +130,7 @@ alert(favicon.getAttribute('isfav'));
         g_player.source(station_.url);
        this._playbutton();
        let songtitle = document.getElementById('songtitle');
-
+        this._fav = new favButtonVM(station_,document.getElementById('favIcon'));
        songtitle.innerText = "";
 
         ipcRenderer.send('askNowPLaying', station_.url);

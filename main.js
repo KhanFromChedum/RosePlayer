@@ -30,7 +30,7 @@ function createWindow () {
       nodeIntegration: true,     //In order to get access to ipc renderer 
       contextIsolation: false
     }
-    ,frame:true
+    ,frame:false
   })
 
   win.loadFile('index.html')
@@ -191,8 +191,8 @@ ipcMain.on('askFavoritesOne',(event_)=>{
   });
 });
 
-ipcMain.on('askIfCurrentStationFav',(event_,station_)=>{
-  isCurrentStationFav(event_,station_);
+ipcMain.on('askIsFavorite',(event_,uuid_)=>{
+  isCurrentStationFav(event_,uuid_);
 });
 
 /**
@@ -200,15 +200,9 @@ ipcMain.on('askIfCurrentStationFav',(event_,station_)=>{
 * @param {object} event_ the event
  * @param {objet} station_ an object station
  */
-function isCurrentStationFav(event_,station_)
+function isCurrentStationFav(event_,uuid_)
 {
-  let uuid=station_.stationuuid;
-  if(station_.stationuuid == undefined)
-  {
-    uuid = station_.uuid;
-  }
-
-  let query = "select * from favorites where stationuuid='" + uuid + "'" ;
+  let query = "select * from favorites where stationuuid='" + uuid_ + "'" ;
 
   console.log(query);
 
@@ -218,22 +212,22 @@ function isCurrentStationFav(event_,station_)
       }
       if(rows.length == 0)
       {
-        event_.reply('replyIfCurrentStationFav',false);
+        event_.reply(uuid_,false);
       }
       else{
-        event_.reply('replyIfCurrentStationFav',true);
+        event_.reply(uuid_,true);
       }
       return console.log(rows);
   });
 }
 
 ipcMain.on('addFavorite',(event_,station_)=>{
-  AddToFavorites(station_);
+  AddToFavorites(event_,station_);
 });
 
 ipcMain.on('removeFavorite',(event_,station_)=>{
   console.log('remove');
-  RemoveFromFavorites(station_);
+  RemoveFromFavorites(event_,station_);
  });
 
  function askAdvancedStations(event_,advSearch_)
@@ -256,7 +250,10 @@ ipcMain.on('removeFavorite',(event_,station_)=>{
     askAdvancedStations(event_,advSearch);
  })
 
-
+/**
+ * Ask for all favorites
+ * @param {object} callback_ function callback, get favorites row as parameter
+ */
 function getAllFavorites(callback_)
 {
     let query = "select * from favorites";
@@ -270,16 +267,19 @@ function getAllFavorites(callback_)
     });
 }
 
-
-function AddToFavorites(station_)
+/**
+ * Add a station to the favorite
+ * @param {object} station_ a station objet
+ */
+function AddToFavorites(event_,station_)
 {
     let query = "insert into favorites(stationuuid,name,url,homepage,favicon,tags) values('" + station_.stationuuid + "','" + station_.name + "','" + station_.url + "','" + station_.homepage +"','" + station_.favicon +  "','" +station_.tags + "')";
-   // console.log(query);
+    console.log(query);
     db.run(query, [], function(err) {
         if (err) {
             return console.log(err.message);
         }
-        
+        event_.reply(station_.stationuuid,true);
         console.log(`A row has been inserted with rowid ${this.lastID}`);
     });
 
@@ -289,12 +289,9 @@ function AddToFavorites(station_)
  * remove a station object from the favorite database
  * @param {object} station a station object
  */
- function RemoveFromFavorites(station_)
- {
-   let uuid;
- 
-  uuid = station_.stationuuid;
-
+ function RemoveFromFavorites(event_,station_)
+ { 
+      let uuid = station_.stationuuid;
 
      let query = "delete from favorites where stationuuid = '" +uuid  + "'";
      console.log(query);
@@ -302,7 +299,7 @@ function AddToFavorites(station_)
          if (err) {
              return console.log(err.message);
          }
-     
+         event_.reply(station_.stationuuid,false);
          console.log(`A row has been removed with rowid ${this.lastID}`);
      });   
      

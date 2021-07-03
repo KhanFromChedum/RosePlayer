@@ -10,29 +10,19 @@ class displayResultVM extends templateLoader
     _ul;
     _stationVM;
     
+    /**
+     * Default constructor
+     */
     constructor()
     {
         super();
         this._stations = new Array();
-        //this._stationVM = new stationVM();
 
         this._getTemplate('./html/displayResult.html','displayResult').then((res_)=>
         {
             this._ul = res_;
         });
     }
-
-
-    // moreButton()
-    // {
-    //     let btn = document.createElement('button');
-    //     btn.innerText = 'more...';
-    //     btn.addEventListener('click',(e_)=>{
-    //         this._filter['newsearch'] = false;
-    //         ipcRenderer.send('askRadios',this._filter);
-    //     });
-    //     return btn;
-    // }
 
     async create(filter_,stations_)
     {
@@ -58,8 +48,6 @@ class displayResultVM extends templateLoader
             })
             
         }
-
-        //this._ul.appendChild(this.moreButton());
         return this._ul;
     }
 }
