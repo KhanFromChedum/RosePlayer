@@ -17,7 +17,7 @@ class searchStations
         this._filter = new Object();
         this._filter.by = filter_.by;
         this._filter.searchterm = filter_.searchterm;
-        this._filter.limit = 200;
+       // this._filter.limit = 500;
         this._filter.newsearch = filter_.newsearch;
         if(filter_.offset != undefined)
         {

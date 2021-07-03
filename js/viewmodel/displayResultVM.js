@@ -14,7 +14,7 @@ class displayResultVM extends templateLoader
     {
         super();
         this._stations = new Array();
-        this._stationVM = new stationVM();
+        //this._stationVM = new stationVM();
 
         this._getTemplate('./html/displayResult.html','displayResult').then((res_)=>
         {
@@ -23,16 +23,16 @@ class displayResultVM extends templateLoader
     }
 
 
-    moreButton()
-    {
-        let btn = document.createElement('button');
-        btn.innerText = 'more...';
-        btn.addEventListener('click',(e_)=>{
-            this._filter['newsearch'] = false;
-            ipcRenderer.send('askRadios',this._filter);
-        });
-        return btn;
-    }
+    // moreButton()
+    // {
+    //     let btn = document.createElement('button');
+    //     btn.innerText = 'more...';
+    //     btn.addEventListener('click',(e_)=>{
+    //         this._filter['newsearch'] = false;
+    //         ipcRenderer.send('askRadios',this._filter);
+    //     });
+    //     return btn;
+    // }
 
     async create(filter_,stations_)
     {
@@ -51,11 +51,15 @@ class displayResultVM extends templateLoader
 
         for(var i =0; i < this._stations.length;i++)
         {
-            let li = this._stationVM.create(this._stations[i]);
-            this._ul.appendChild(li);
+            this._stationVM = new stationVM();
+            this._stationVM.create(this._stations[i]).then((li_)=>
+            {
+                this._ul.appendChild(li_);
+            })
+            
         }
 
-        this._ul.appendChild(this.moreButton());
+        //this._ul.appendChild(this.moreButton());
         return this._ul;
     }
 }

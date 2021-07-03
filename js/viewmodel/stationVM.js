@@ -98,9 +98,23 @@ class stationVM //extends templateLoader
 
     }
 
-    create(station_)
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      async getValue()
+      {
+          while(this._li == undefined)
+          {
+              await this.sleep(100);
+          }
+          return this._li;
+      }
+
+    async create(station_)
     {
-        let liclone = this._li.cloneNode(true);
+        let li = await this.getValue();
+        let liclone = li.cloneNode(true);
         this._fillStation(liclone,station_);
         return liclone;
     }

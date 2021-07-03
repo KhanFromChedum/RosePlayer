@@ -19,9 +19,9 @@ class templates extends templateLoader
 
     async getValue()
     {
-        if(this._stationTemplate == undefined)
+        while(this._stationTemplate == undefined)
         {
-            await this.sleep(1000);
+            await this.sleep(100);
         }
     }
 

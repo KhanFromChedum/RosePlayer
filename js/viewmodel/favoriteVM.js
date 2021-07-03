@@ -9,7 +9,8 @@ const stationVM = require( './stationVM');
 class favoriteVM extends templateLoader
 {
     _ul;
-    _stationVM;
+    _stationVMs;
+    _stations;
     
     /**
      * Constructor
@@ -18,7 +19,7 @@ class favoriteVM extends templateLoader
     {
         super();
         this._stations = new Array();
-        this._stationVM = new stationVM();
+        //this._stationVM = new stationVM();
         this._getTemplate('./html/displayResult.html','displayResult').then((res_)=>
         {
             this._ul = res_;
@@ -33,15 +34,18 @@ class favoriteVM extends templateLoader
      */
     async create(stations_)
     {
-
+console.log(stations_);
         this._ul.innerHTML= "";
-
+        this._stationVMs = new Array();
 
         for(var i =0; i < stations_.length;i++)
         {
-
-            let li = this._stationVM.create(stations_[i]);
-            this._ul.appendChild(li);
+            let station = new stationVM();
+            this._stationVMs.push(station);
+            station.create(stations_[i]).then((li_)=>{
+                this._ul.appendChild(li_);
+            });
+            
         }
 
         return this._ul;

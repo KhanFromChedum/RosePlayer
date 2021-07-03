@@ -42,16 +42,19 @@ ipcRenderer.on('replyStations',(a_,stations_,filter_)=>{
 
 let tabfav = document.getElementById("tabFav");
 let favoritVM = new favoriteVM();
+
+ipcRenderer.on('replyFavoritesOne',(event_,stations_)=>{
+    favoritVM.create(stations_).then((res_)=>{
+        document.getElementById('tabfavorite').innerHTML = "";
+        document.getElementById('tabfavorite').appendChild(res_);
+   
+    });
+});
+
 tabfav.addEventListener('click',(e_)=>
 {
     ipcRenderer.send('askFavoritesOne');
-    ipcRenderer.on('replyFavoritesOne',(event_,stations_)=>{
-        favoritVM.create(stations_).then((res_)=>{
-            document.getElementById('tabfavorite').innerHTML = "";
-            document.getElementById('tabfavorite').appendChild(res_);
-       
-        });
-    });
+
 });
 
 

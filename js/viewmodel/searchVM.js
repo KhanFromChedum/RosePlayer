@@ -7,6 +7,7 @@ class searchVM extends templateLoader
     _div;
     _ul;
     _ready;
+    _stationVMs;
 
     /**
      * Constructor
@@ -15,7 +16,8 @@ class searchVM extends templateLoader
     {
         super();
         this._ready = false;
-        this._stationVM = new stationVM();
+        this._stationVMs = new Array();
+        //this._stationVM = new stationVM();
         this._getTemplate('./html/search.html','search').then((div_)=>{
             this._div=div_;
             let input = this._div.getElementsByTagName('input')[0];
@@ -27,10 +29,16 @@ class searchVM extends templateLoader
         });
 
         ipcRenderer.on('replayAdvancedStations',(event_,stations_)=>{
+            this._stationVMs= new Array;
             for(var i =0; i < stations_.length;i++)
             {
-                let li = this._stationVM.create(stations_[i]);
-                this._ul.appendChild(li);
+                let vm = new stationVM();
+                this._stationVMs.push(vm);
+                vm.create(stations_[i]).then((li_)=>{
+                    this._ul.appendChild(li_);
+
+                });
+                
             }
             if(stations_.length == 0)
             {
