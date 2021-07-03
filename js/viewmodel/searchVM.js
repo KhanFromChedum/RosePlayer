@@ -5,7 +5,6 @@ const stationVM = require('./stationVM');
 class searchVM extends templateLoader
 {
     _div;
-    _stationVM;
     _ul;
     _ready;
 

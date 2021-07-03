@@ -47,6 +47,35 @@ class playerVM
         ipcRenderer.on('replyNowPLaying',(event_,song_)=>{
             songtitle.innerText = song_;
         });
+
+        ipcRenderer.on('replyIfCurrentStationFav',(event_,reply_)=>{
+            let favicon = document.getElementById('favIcon');
+            favicon.src= "./img/favorite_border_black_48dp.svg";
+            favicon.setAttribute('isfav',false);
+            if(reply_==true)
+            {
+                favicon.setAttribute('isfav',true);
+                favicon.src="./img/favorite_black_48dp.svg";
+            }
+        });
+
+        let favicon = document.getElementById('favIcon');
+        favicon.addEventListener('click',(e_)=>{
+alert(favicon.getAttribute('isfav'));            
+            if(favicon.getAttribute('isfav')==true)
+            {
+               
+                ipcRenderer.send('removeFavorite',this._station);
+                favicon.src= "./img/favorite_border_black_48dp.svg";
+                favicon.setAttribute('isfav',false);
+            }
+            else{
+                ipcRenderer.send('addFavorite',this._station);
+                favicon.src="./img/favorite_black_48dp.svg";
+                favicon.setAttribute('isfav',true);
+            }
+
+        });
     }
 
     _setLogo()
@@ -132,6 +161,8 @@ class playerVM
 
         ipcRenderer.send('askNowPLaying', station_.url);
 
+        ipcRenderer.send('askIfCurrentStationFav',station_);
+        
     }
 
 

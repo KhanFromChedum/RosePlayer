@@ -30,7 +30,7 @@ function createWindow () {
       nodeIntegration: true,     //In order to get access to ipc renderer 
       contextIsolation: false
     }
-    ,frame:false
+    ,frame:true
   })
 
   win.loadFile('index.html')
@@ -191,6 +191,42 @@ ipcMain.on('askFavoritesOne',(event_)=>{
   });
 });
 
+ipcMain.on('askIfCurrentStationFav',(event_,station_)=>{
+  isCurrentStationFav(event_,station_);
+});
+
+/**
+ * Ask if the asked station is fav or not.
+* @param {object} event_ the event
+ * @param {objet} station_ an object station
+ */
+function isCurrentStationFav(event_,station_)
+{
+  let uuid=station_.stationuuid;
+  if(station_.stationuuid == undefined)
+  {
+    uuid = station_.uuid;
+  }
+
+  let query = "select * from favorites where stationuuid='" + uuid + "'" ;
+
+  console.log(query);
+
+  db.all(query, [], function(err,rows) {
+      if (err) {
+          return console.log(err.message);
+      }
+      if(rows.length == 0)
+      {
+        event_.reply('replyIfCurrentStationFav',false);
+      }
+      else{
+        event_.reply('replyIfCurrentStationFav',true);
+      }
+      return console.log(rows);
+  });
+}
+
 ipcMain.on('addFavorite',(event_,station_)=>{
   AddToFavorites(station_);
 });
@@ -213,14 +249,13 @@ ipcMain.on('removeFavorite',(event_,station_)=>{
  }
 
  ipcMain.on('AskAdvancedStations',(event_,stationName_)=>
- {
-    console.log(stationName_);
+ { 
     let filter = new Object();
     filter.name = stationName_;
-    console.log(filter);
     let advSearch = new advancedSearchStation(filter);
     askAdvancedStations(event_,advSearch);
  })
+
 
 function getAllFavorites(callback_)
 {
@@ -273,11 +308,6 @@ function AddToFavorites(station_)
      
  }
 
- function test(song_)
- {
-   
- }
-
 let interval = undefined;
  ipcMain.on('askNowPLaying',(event_,stationurl_)=>{
   
@@ -287,7 +317,6 @@ let interval = undefined;
       clearInterval(interval);
     }
     interval = setInterval(() => {
-      console.log(song);
       if(song != undefined)
       {
         event_.reply('replyNowPLaying',song.title);
@@ -296,7 +325,7 @@ let interval = undefined;
       {
         event_.reply('replyNowPLaying',"");
       }
-    }, 1000);    
+    }, 5000);    //Ask for song every 5 seconds
     }, internetradio.StreamSource.STREAM);
 
  })

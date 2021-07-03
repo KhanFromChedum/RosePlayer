@@ -1,18 +1,19 @@
-const templateLoader = require( './templateLoader');
+const templates = require( './templates');
 const playerVM = require( './PlayerVM');
 const { ipcRenderer, ipcMain, Accelerator } = require('electron');
 
 var g_player = new playerVM();
 
-class stationVM extends templateLoader
+class stationVM //extends templateLoader
 {
     _li;
     _favorites;
 
     constructor()
     {
-        super();
-        this._getTemplate('./html/station.html','station').then((li)=>{this._li=li;});
+         templates.getStationTemplate().then((li_)=>{
+            this._li = li_;
+        });
         ipcRenderer.on('replyFavorites',(event_,favorites_)=>
         {
             this._favorites = favorites_;
@@ -80,21 +81,18 @@ class stationVM extends templateLoader
             ipcRenderer.send('askFavorites');
             if(isFav == "true")
             {
-                console.log('remove');
                 ipcRenderer.send('removeFavorite',station_);
                 this._isFavorite(li_,false);
                 
             }
             else
             {
-                console.log('add');
                 ipcRenderer.send('addFavorite',station_);
                 this._isFavorite(li_,true);
             }
         });
 
         li_.addEventListener('click',(e_)=>{
-            console.log(station_);
             g_player.play(station_);
         })
 
