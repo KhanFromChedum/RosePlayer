@@ -15,5 +15,11 @@
 {
     -webkit-appearance: slider-vertical;
     width: 20px;
-    height: 80px;
+    height: 60px;
+}
+
+#waveform
+{
+    height: 100px;
+    width: 200px;   
 }

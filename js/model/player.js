@@ -21,10 +21,12 @@ class player
         this._isPlaying = false;
 
         this._context = new AudioContext();
-        this._analyser = this._context.createAnalyser();
+        
 
         this._source = this._context.createMediaElementSource(this._audio);
-    
+        this._analyser = this._context.createAnalyser();
+this._source.connect(this._analyser);
+
         this._lband = this._context.createBiquadFilter();
         this._lband.type = "lowshelf";
         this._lband.frequency.value = 360;
@@ -45,6 +47,15 @@ class player
         this._hband.connect(this._peaking);
 
         this._peaking.connect(this._context.destination);
+    }
+
+    /**
+     * Gete the analyser for the audio context.
+     * @returns Analyser for the audio context
+     */
+    getAnalyser()
+    {
+        return this._analyser;
     }
 
     /**

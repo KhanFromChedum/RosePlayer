@@ -9,6 +9,7 @@ class playerVM
     _htmlPlayer;
     _player;
     _station;
+    _ctx;
 
     /**
      * constructor
@@ -49,6 +50,34 @@ class playerVM
             songtitle.innerText = song_;
         });
 
+        var canvas = document.getElementById("waveform");
+        this._ctx = canvas.getContext("2d");
+
+        const frequencyData = new Uint8Array(1024);
+        setInterval(() => {
+            g_player.getAnalyser().getByteFrequencyData(frequencyData);
+            this._draw(document.getElementById("waveform"),frequencyData);
+            console.log(frequencyData);
+          }, 100);
+
+    }
+
+
+    _draw(cnv,valarr)
+    {
+        let wdth = cnv.width/valarr.length;
+        let h = cnv.height;
+        this._ctx.beginPath();
+        this._ctx.fillStyle = "rgba(0, 0, 0, 255)";
+        this._ctx.fillRect(0, 0, cnv.width, cnv.height);    
+        this._ctx.stroke();
+        for(var i =0; i < valarr.length;i++)
+        {
+            this._ctx.fillStyle = "green";
+            let barh = cnv.height*valarr[i]/255;
+            let x = h-barh;
+            this._ctx.fillRect(wdth*i,x, wdth, barh);
+        }
     }
 
     _setLogo()
@@ -115,10 +144,9 @@ class playerVM
                     break;
             }
         });
-
-        
-
     }
+
+
 
     _fav;
 
