@@ -58,11 +58,14 @@ class playerVM
             g_player.getAnalyser().getByteFrequencyData(frequencyData);
             this._draw(document.getElementById("waveform"),frequencyData);
             console.log(frequencyData);
-          }, 100);
-
+          }, 50);
     }
 
-
+    /**
+     * Draw a graph frame
+     * @param {object} cnv the canvas element
+     * @param {array} valarr FFT result
+     */
     _draw(cnv,valarr)
     {
         let wdth = cnv.width/valarr.length;
@@ -80,18 +83,21 @@ class playerVM
         }
     }
 
+    /**Set the logo with the station icon */
     _setLogo()
     {
         let logo = document.getElementById('logo');
         logo.src = this._station.favicon;
     }
 
+    /**Set the name with the station name */
     _setradioname()
     {
         let radioname = document.getElementById('radioname');
         radioname.innerText = this._station.name;
     }
 
+    /**Bind volume input to the audio volume */
     _bindvolume()
     {
         let volume = document.getElementById('volumeinput');
@@ -101,6 +107,7 @@ class playerVM
         });
     }
 
+    /**Bind bass input to the audio */
     _bindbass()
     {
         let bass = document.getElementById('lBand');
@@ -110,6 +117,7 @@ class playerVM
         });
     }
 
+    /**Bind the mid input to the audio */
     _bindmid()
     {
         let mid = document.getElementById('mBand');
@@ -119,6 +127,7 @@ class playerVM
         });
     }
 
+    /**Bind the treble input to the audio */
     _bindtreble()
     {
         let treble = document.getElementById('hBand');

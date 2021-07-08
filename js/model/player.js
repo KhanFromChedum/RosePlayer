@@ -25,7 +25,7 @@ class player
 
         this._source = this._context.createMediaElementSource(this._audio);
         this._analyser = this._context.createAnalyser();
-this._source.connect(this._analyser);
+        this._source.connect(this._analyser);
 
         this._lband = this._context.createBiquadFilter();
         this._lband.type = "lowshelf";

@@ -40,6 +40,7 @@
         <div id='player' class='no-margin left-shadow  '>
             <div class="stick-right flexcolumn flexcenter">
                 <img src="img/music_note_black_48dp.svg" alt="" id='logo'  onerror="defaultpic(this)">
+                <canvas id="waveform"></canvas>
                 <div id='radioname'>Radio name</div>
                 <div id='songtitle'>song title</div>
                 <img src="./img/favorite_border_black_48dp.svg" alt="" class='drSmallImg clickable' id='favIcon'>
@@ -54,7 +55,7 @@
                     <div class='flexcolumn'><div class='title'>mid</div><input  class='eqinput' type="range" name="rangeM" id="mBand" min="-10" max = "10" value="1"></div>
                     <div class='flexcolumn'><div class='title'>treble</div><input class='eqinput' type="range" name="rangeH" id="hBand" min="-10" max="10" value="1"></div>
                 </div>
-                <canvas id="waveform"></canvas>
+                
             </div>
 
         <!-- </div> -->
