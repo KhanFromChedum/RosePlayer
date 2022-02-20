@@ -24,7 +24,9 @@ let win;
 function createWindow () {
    win = new BrowserWindow({
     width: 800,
-    height: 700,
+     height: 700,
+     minWidth: 800,
+    minHeight:700,
     icon:"./img/outline_filter_vintage_black_48dp.png",
     webPreferences: {
       nodeIntegration: true,     //In order to get access to ipc renderer 
@@ -225,7 +227,7 @@ ipcMain.on('addFavorite',(event_,station_)=>{
 });
 
 ipcMain.on('removeFavorite',(event_,station_)=>{
-  console.log('remove');
+  //console.log('remove');
   RemoveFromFavorites(event_,station_);
  });
 
