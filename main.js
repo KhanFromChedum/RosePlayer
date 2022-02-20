@@ -48,7 +48,7 @@ function CreateTable()
             return console.log(err.message);
         }
         
-        console.log(`success`);
+       //console.log(`success`);
     });
 }
 //CreateTable();
@@ -175,7 +175,7 @@ ipcMain.on('askRadios',(event_,filter_)=>{
 });
 
 ipcMain.on('openurl',(event_,url_)=>{
-  console.log(url_);
+  //console.log(url_);
   shell.openExternal(url_);
 });
 
@@ -273,7 +273,7 @@ function getAllFavorites(callback_)
 function AddToFavorites(event_,station_)
 {
     let query = "insert into favorites(stationuuid,name,url,homepage,favicon,tags) values('" + station_.stationuuid + "','" + station_.name + "','" + station_.url + "','" + station_.homepage +"','" + station_.favicon +  "','" +station_.tags + "')";
-    console.log(query);
+    //console.log(query);
     db.run(query, [], function(err) {
         if (err) {
             return console.log(err.message);
@@ -293,36 +293,38 @@ function AddToFavorites(event_,station_)
       let uuid = station_.stationuuid;
 
      let query = "delete from favorites where stationuuid = '" +uuid  + "'";
-     console.log(query);
+     //console.log(query);
      db.run(query, [], function(err) {
          if (err) {
              return console.log(err.message);
          }
          event_.reply(station_.stationuuid,false);
-         console.log(`A row has been removed with rowid ${this.lastID}`);
+        // console.log(`A row has been removed with rowid ${this.lastID}`);
      });   
      
  }
 
 let interval = undefined;
  ipcMain.on('askNowPLaying',(event_,stationurl_)=>{
-  
-  internetradio.getStationInfo(stationurl_, function(error, song) {
-    if(interval != undefined)
-    {
-      clearInterval(interval);
-    }
-    interval = setInterval(() => {
-      if(song != undefined)
-      {
-        event_.reply('replyNowPLaying',song.title);
-      }
-      else
-      {
-        event_.reply('replyNowPLaying',"");
-      }
-    }, 5000);    //Ask for song every 5 seconds
-    }, internetradio.StreamSource.STREAM);
+   try {
+     internetradio.getStationInfo(stationurl_, function (error, song) {
+       if (interval != undefined) {
+         clearInterval(interval);
+       }
+       interval = setInterval(() => {
+         if (song != undefined) {
+           event_.reply('replyNowPLaying', song.title);
+         }
+         else {
+           event_.reply('replyNowPLaying', "");
+         }
+       }, 5000);    //Ask for song every 5 seconds
+     }, internetradio.StreamSource.STREAM);
+   }
+   catch (error)
+   {
+     console.log(error);
+   }
 
  })
 

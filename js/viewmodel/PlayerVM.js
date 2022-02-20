@@ -57,7 +57,7 @@ class playerVM
         setInterval(() => {
             g_player.getAnalyser().getByteFrequencyData(frequencyData);
             this._draw(document.getElementById("waveform"),frequencyData);
-            console.log(frequencyData);
+           // console.log(frequencyData);
           }, 50);
     }
 
