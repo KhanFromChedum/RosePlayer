@@ -76,12 +76,17 @@ class playerVM
         this._ctx.stroke();
         for(var i =0; i < valarr.length;i++)
         {
-            this._ctx.fillStyle = "green";
+            var grad= this._ctx.createLinearGradient(50, 50, 50, 150);
+            grad.addColorStop(0, "red");
+            grad.addColorStop(0.5, "yellow");
+            grad.addColorStop(1, "green");
+            this._ctx.fillStyle = grad;
             let barh = cnv.height*valarr[i]/255;
             let x = h-barh;
             this._ctx.fillRect(wdth*i,x, wdth, barh);
         }
     }
+
 
     /**Set the logo with the station icon */
     _setLogo()
